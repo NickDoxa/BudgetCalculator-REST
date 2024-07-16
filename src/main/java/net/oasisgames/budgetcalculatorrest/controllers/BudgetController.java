@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 /**
  * REST Controller for the Budget App
  */
@@ -40,6 +42,11 @@ public class BudgetController {
         double taxes = budgetService.getBudgetRepository().getTaxesTaken(user);
         double expenses = budgetService.getBudgetRepository().getExpenses(user);
         return new BudgetInformation(user, remainder, taxes, expenses);
+    }
+
+    @GetMapping("users")
+    public UserList getAllUsers() {
+        return new UserList(budgetService.getBudgetRepository().getAllUsers());
     }
 
     /**
@@ -80,6 +87,20 @@ public class BudgetController {
             this.remainder = remainder;
             this.taxes = taxes;
             this.expenses = expenses;
+        }
+
+    }
+
+    /**
+     * Static inner class created for the purpose of returning JSON data instead of a raw
+     * string list of users
+     */
+    public static class UserList {
+
+        public List<String> users;
+
+        public UserList(List<String> users) {
+            this.users = users;
         }
 
     }
