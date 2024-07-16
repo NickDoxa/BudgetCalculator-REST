@@ -3,6 +3,10 @@ package net.oasisgames.budgetcalculatorrest;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+/**
+ * Budget Calculator App created by:
+ * @author Nick
+ */
 @SpringBootApplication
 public class BudgetCalculatorRestApplication {
 

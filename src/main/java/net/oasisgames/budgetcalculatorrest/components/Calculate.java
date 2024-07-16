@@ -6,6 +6,9 @@ import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.util.Arrays;
 
+/**
+ * Class for calculating basic information about the users budget
+ */
 @Component
 public class Calculate {
 

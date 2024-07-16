@@ -6,11 +6,22 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * REST Controller for the Budget App
+ */
 @RestController
 public class BudgetController {
 
     private BudgetService budgetService;
 
+    /**
+     * Post Mapping for the budget path
+     * @param user the users name
+     * @param income the users income
+     * @param monthly_expenses the users monthly expenses
+     * @param weekly_expenses the users weekly expenses
+     * @return Budget report in JSON format
+     */
     @PostMapping("budget")
     public BudgetReport sendBudgetData(String user, double income,
                                double monthly_expenses, double weekly_expenses) {
@@ -18,6 +29,11 @@ public class BudgetController {
                 user, income, new double[] {monthly_expenses}, new double[] {weekly_expenses}));
     }
 
+    /**
+     * Get Mapping for the budget path
+     * @param user the users name
+     * @return Budget information in JSON format
+     */
     @GetMapping("budget")
     public BudgetInformation getBudgetData(String user) {
         double remainder = budgetService.getBudgetRepository().getTotalRemainder(user);
@@ -26,11 +42,19 @@ public class BudgetController {
         return new BudgetInformation(user, remainder, taxes, expenses);
     }
 
+    /**
+     * Autowired setter for the BudgetService object
+     * @param budgetService the budget service object (Autowired)
+     */
     @Autowired
     public void setBudgetService(BudgetService budgetService) {
         this.budgetService = budgetService;
     }
 
+    /**
+     * Static inner class created for the purpose of returning JSON data instead of a raw
+     * String report
+     */
     public static class BudgetReport {
 
         public String report;
@@ -40,6 +64,10 @@ public class BudgetController {
         }
     }
 
+    /**
+     * Static inner class created for the purpose of returning JSON data instead of raw
+     * budget data
+     */
     public static class BudgetInformation {
 
         public String user;
