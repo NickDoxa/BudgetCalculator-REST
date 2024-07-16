@@ -44,6 +44,10 @@ public class BudgetController {
         return new BudgetInformation(user, remainder, taxes, expenses);
     }
 
+    /**
+     * Get Mapping for the users path
+     * @return Users list in JSON format
+     */
     @GetMapping("users")
     public UserList getAllUsers() {
         return new UserList(budgetService.getBudgetRepository().getAllUsers());
